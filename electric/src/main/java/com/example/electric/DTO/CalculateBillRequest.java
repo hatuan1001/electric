@@ -1,10 +1,16 @@
 package com.example.electric.DTO;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDate;
 
 public class CalculateBillRequest {
     private String userId;
     private LocalDate usageDate;
+
+    @NotNull
+    @Positive(message = "số điện sử dụng không được âm")
     private Double kwhUsed;
 
     public String getUserId() {

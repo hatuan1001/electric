@@ -3,6 +3,7 @@ package com.example.electric.controller;
 import com.example.electric.DTO.CalculateBillRequest;
 import com.example.electric.entity.ElectricityHistory;
 import com.example.electric.service.ElectricityService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +21,7 @@ public class ElectricityController {
 
     @PreAuthorize("hasAuthority('ROLE_ELECTRIAN')")
     @PostMapping("/calculate")
-    public ResponseEntity<ElectricityHistory> calculateBill(@RequestBody CalculateBillRequest request) {
+    public ResponseEntity<ElectricityHistory> calculateBill(@Valid @RequestBody CalculateBillRequest request) {
         try {
             ElectricityHistory result = electricityService.calculateAndSaveBill(request);
             return ResponseEntity.ok(result);
